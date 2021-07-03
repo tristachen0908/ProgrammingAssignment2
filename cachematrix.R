@@ -6,9 +6,10 @@
 makeCacheMatrix <- function(x = matrix()) {
   i <- NULL
   set <- function(y) {
-    x <<- y
-    i <<- NULL
+    x <<- y   #set the input as x
+    i <<- NULL   #set the solved value "i" as a null
   }
+  #Here, I changed every "mean" in the reference to "solve".
   get <- function() x
   setinverse <- function(inverse) i <<- inverse
   getinverse <- function() i
@@ -17,9 +18,9 @@ makeCacheMatrix <- function(x = matrix()) {
        getinverse = getinverse)
 }
 
-
 ## Write a short comment describing this function
 
+#Here, I did the same thing. I changed every "mean" in the reference to "solve".
 cacheSolve <- function(x, ...) {
   i <- x$getinverse()                        
   if(!is.null(i)) {                                 
@@ -31,3 +32,6 @@ cacheSolve <- function(x, ...) {
   x$setinverse(i)                               
   i                                                 
 }
+
+
+
