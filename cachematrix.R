@@ -1,36 +1,34 @@
-## Put comments here that give an overall description of what your
-## functions do
-
-## Write a short comment describing this function
-
+# This function creates a special "matrix" object that can cache its inverse.
+# set the input x as matrix
 makeCacheMatrix <- function(x = matrix()) {
-  i <- NULL
+  inv <- NULL
   set <- function(y) {
     x <<- y   #set the input as x
-    i <<- NULL   #set the solved value "i" as a null
+    inv <<- NULL   #set the solved value "inv" as a null
   }
-  #Here, I changed every "mean" in the reference to "solve".
-  get <- function() x
-  setinverse <- function(inverse) i <<- inverse
-  getinverse <- function() i
+  get <- function() x #function to get matrix x
+  setinverse <- function(inverse) inv <<- inverse  #calculate the inverse
+  getinverse <- function() inv #function to get the inverse of the matrix
   list(set = set, get = get,
        setinverse = setinverse,
        getinverse = getinverse)
 }
 
-## Write a short comment describing this function
+# This function computes the inverse of the special "matrix" created by 
+# makeCacheMatrix above. If the inverse has already been calculated (and the 
+# matrix has not changed), then it should retrieve the inverse from the cache.
 
-#Here, I did the same thing. I changed every "mean" in the reference to "solve".
 cacheSolve <- function(x, ...) {
-  i <- x$getinverse()                        
-  if(!is.null(i)) {                                 
+  #Return a matrix that is the inverse of 'x'
+  inv <- x$getinverse()                        
+  if(!is.null(inv)) {                 #checking whether inverse is NULL                
     message("getting cached data")    
-    return(i)                                     
+    return(inv)                         # returns inverse value          
   }
   data <- x$get()                            
-  i <- solve(data, ...)                         
-  x$setinverse(i)                               
-  i                                                 
+  inv <- solve(data, ...)    #calculates inverse value                     
+  x$setinverse(inv)                               
+  inv         #return a matrix that is the inverse of 'x'                                        
 }
 
 
